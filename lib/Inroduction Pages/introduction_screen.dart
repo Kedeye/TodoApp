@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:universite_qr_code/Orientationpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'begin.dart';
 
 class IntroScreen extends StatelessWidget {
   IntroScreen({Key? key}) : super(key: key);
 
-  ///Changed a little bit of buttons styling and text for the thumbnail lol
-  ///Thanks for coming here :-)
 
   final List<PageViewModel> pages = [
     PageViewModel(
@@ -30,7 +29,7 @@ class IntroScreen extends StatelessWidget {
         image: Center(
           child: FractionallySizedBox(
             heightFactor: 1.4,
-            child: Image.asset('assets/QR Code-rafiki.png'),
+            child: Image.asset('assets/images/QR Code-rafiki.png'),
           ),
         ),
         decoration: const PageDecoration(
@@ -61,7 +60,7 @@ class IntroScreen extends StatelessWidget {
         ),
         image: Center(
           child: FractionallySizedBox(
-              heightFactor: 1.3, child: Image.asset('assets/QR Code-amico.png')),
+              heightFactor: 1.3, child: Image.asset('assets/images/QR Code-amico.png')),
         ),
         decoration: const PageDecoration(
             titleTextStyle: TextStyle(
@@ -78,7 +77,7 @@ class IntroScreen extends StatelessWidget {
           width: 300,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                primary: Colors.red,
+                backgroundColor: Colors.red,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 elevation: 8),
@@ -89,7 +88,7 @@ class IntroScreen extends StatelessWidget {
         image: Center(
           child: FractionallySizedBox(
               heightFactor: 1.2,
-              child: Image.asset('assets/Headphone-amico.png')),
+              child: Image.asset('assets/images/Headphone-amico.png')),
         ),
         decoration: const PageDecoration(
             titleTextStyle: TextStyle(
@@ -138,6 +137,6 @@ class IntroScreen extends StatelessWidget {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('ON_BOARDING', false);
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => Orientationpage()));
+        context, MaterialPageRoute(builder: (context) => const BeginScreen()));
   }
 }

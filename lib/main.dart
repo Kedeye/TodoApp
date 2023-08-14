@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:universite_qr_code/Orientationpage.dart';
-import 'package:universite_qr_code/iintroduction_screen.dart';
-import 'package:universite_qr_code/scanqr.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'dart:async';
+
+import 'Inroduction Pages/begin.dart';
+import 'Inroduction Pages/introduction_screen.dart';
+import 'Ticket/scanqr_code.dart';
 
 bool show = true;
 Future<void> main() async {
@@ -23,18 +24,18 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   final String? uid;
 
-  MyApp({Key? key, this.uid}) : super(key: key);
+  const MyApp({Key? key, this.uid}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute:
-          show ? 'introscreen' : (uid == null ? 'Orientationpage' : 'ScanQRPage'),
+          show ? 'introScreen' : (uid == null ? 'Begin' : 'ScanQR'),
       routes: {
-        "introscreen": (context) => IntroScreen(),
-        "Orientationpage": (context) => Orientationpage(),
-        "ScanQRPage": (context) => const ScanQRPage(),
+        "introScreen": (context) => IntroScreen(),
+        "Begin": (context) => const BeginScreen(),
+        "ScanQR": (context) => const ScanQRPage(),
       },
     );
   }

@@ -1,38 +1,21 @@
-// ignore_for_file: prefer_const_constructors, unused_import, prefer_interpolation_to_compose_strings
-// ignore_for_file: use_key_in_widget_constructors,
-// ignore_for_file: sort_child_properties_last, use_build_context_synchronously,
-// ignore_for_file: depend_on_referenced_packages
-// ignore_for_file: prefer_const_constructors_in_immutables,
-// ignore_for_file: non_constant_identifier_names,
-// ignore_for_file: unnecessary_string_interpolations
-// ignore_for_file: must_be_immutable
-// ignore_for_file: avoid_unnecessary_containers
-// ignore_for_file: camel_case_types
-// ignore_for_file: sized_box_for_whitespace
-// ignore_for_file: dead_code,
-// ignore_for_file: unused_label
-// ignore_for_file: file_names
-// ignore_for_file: avoid_print
-// ignore_for_file: prefer_const_literals_to_create_immutables
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:universite_qr_code/scanqr.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+import '../Ticket/scanqr_code.dart';
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  LoginScreenState createState() => LoginScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class LoginScreenState extends State<LoginScreen> {
   final ScrollController scrollController = ScrollController();
   TextEditingController usernameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -126,6 +109,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       final sharedPref = await SharedPreferences.getInstance();
       sharedPref.setString("UID", _uid);
 
+      if (!mounted) return;
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const ScanQRPage(),
@@ -157,11 +141,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            icon: CircleAvatar(
+            icon: const CircleAvatar(
               backgroundColor: Color(0xff8cccff),
               child: Icon(
                 Icons.arrow_back,
-                color: Colors.black,
+                color: Colors.white,
+                size: 30,
               ),
             ),
             onPressed: () => Navigator.of(context).pop(),
@@ -181,17 +166,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     children: [
                       Text(
                         "REJOIGNEZ",
-                        style: GoogleFonts.montserrat(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
                           fontSize: screenWidth / 8,
+                          color: Colors.white,
                         ),
                       ),
                       Text(
                         "Enregistrez ton compte!",
-                        style: GoogleFonts.montserrat(
-                          color: Colors.white,
+                        style: TextStyle(
+                          fontFamily: 'Cairo',
+                          fontWeight: FontWeight.w700,
                           fontSize: screenWidth / 30,
+                          color: Colors.white,
                         ),
                       ),
                     ],
@@ -266,11 +254,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             color: Colors.white,
                                             strokeWidth: 4,
                                           ))
-                                      : Text(
+                                      : const Text(
                                           "CONTINUE",
-                                          style: GoogleFonts.montserrat(
+                                          style: TextStyle(
+                                            fontFamily: 'JosefinSans',
+                                            fontWeight: FontWeight.w500,
                                             color: Colors.white,
-                                            fontWeight: FontWeight.bold,
                                             letterSpacing: 1.5,
                                             fontSize: 18,
                                           ),
@@ -295,10 +284,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void showSnackBarText(String text) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(text, style: TextStyle(color: Colors.white)),
+        content: Text(text, style: const TextStyle(color: Colors.white)),
         backgroundColor: Colors.red,
         behavior: SnackBarBehavior.floating,
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -315,11 +304,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           "Telephone",
-          style: GoogleFonts.montserrat(
+          style: TextStyle(
+            fontFamily: 'RobotoSlab',
+            fontWeight: FontWeight.w300,
+            letterSpacing: 1,
             color: Colors.black87,
-            fontWeight: FontWeight.bold,
           ),
         ),
         IntlPhoneField(
@@ -329,7 +320,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           initialValue: countryDial,
           onCountryChanged: (country) {
             setState(() {
-              countryDial = "+" + country.dialCode;
+              countryDial = "+${country.dialCode}";
             });
           },
           decoration: InputDecoration(
@@ -353,24 +344,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
             textAlign: TextAlign.center,
             text: TextSpan(
               children: [
-                TextSpan(
-                  text: "We just sent a code to ",
-                  style: GoogleFonts.montserrat(
+                const TextSpan(
+                  text: "Nous d'envoyer un code à ",
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
                     color: Colors.black87,
                     fontSize: 18,
                   ),
                 ),
                 TextSpan(
                   text: countryDial + phoneController.text,
-                  style: GoogleFonts.montserrat(
+                  style: const TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w300,
                     color: Colors.black87,
-                    fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
                 ),
-                TextSpan(
+                const TextSpan(
                   text: "\nEntrez le code ici et nous pouvons continuer!",
-                  style: GoogleFonts.montserrat(
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w300,
                     color: Colors.black87,
                     fontSize: 12,
                   ),
@@ -400,9 +396,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
         RichText(
           text: TextSpan(
             children: [
-              TextSpan(
+              const TextSpan(
                 text: "Vous n'avez pas reçu le code? ",
-                style: GoogleFonts.montserrat(
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w300,
                   color: Colors.black87,
                   fontSize: 12,
                 ),
@@ -414,12 +412,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       screenState = 0;
                     });
                   },
-                  child: Text(
+                  child: const Text(
                     "Renvoyer",
-                    style: GoogleFonts.montserrat(
+                    style: TextStyle(
+                      fontFamily: 'RobotoSlab',
+                      fontWeight: FontWeight.w500,
                       color: Colors.black87,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
                     ),
                   ),
                 ),
