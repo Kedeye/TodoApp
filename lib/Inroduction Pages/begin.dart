@@ -121,7 +121,7 @@ class BeginScreenState extends State<BeginScreen> {
                   ),
                   SizedBox(height: screenHeight * 0.03),
                   Text(
-                    'Ceci est une version de l application "Services Universitaires" , qui est une version pour les employes',
+                    'Ceci est une version de l application "KHEDEMAT" , qui est une version pour les employes',
                     style: TextStyle(
                       color: Colors.red.shade400,
                       fontFamily: 'sans serif',

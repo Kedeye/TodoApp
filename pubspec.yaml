@@ -28,7 +28,7 @@ dependencies:
 flutter_native_splash:
   android: true
   ios: true
-  background_image: "assets/Services universitaires.png"
+  background_image: "assets/images/Services-universitaires.png"
 
 
 
@@ -42,7 +42,7 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/pngwing.com (11).png"
+  image_path: "assets/images/pngwing.com (11).png"
 
 flutter:
 
