@@ -1,4 +1,4 @@
-# universite_qr_code
+# flutter with firebase TodoApp
 
 A new Flutter project.
 
