@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'dart:async';
 
-import 'Inroduction Pages/begin.dart';
-import 'Inroduction Pages/introduction_screen.dart';
-import 'Ticket/scanqr_code.dart';
+import 'pages/addtach/addpage.dart';
+import 'pages/home/home.dart';
+import 'pages/log/login.dart';
 
-bool show = true;
 Future<void> main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  final sharedPref = await SharedPreferences.getInstance();
-  String? uid = sharedPref.getString("UID");
-  runApp(MyApp(uid: uid));
 
-  show = sharedPref.getBool('ON_BOARDING') ?? true;
   FlutterNativeSplash.remove();
+
+  runApp(
+    ScreenUtilInit(
+      designSize: const Size(393, 852),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      useInheritedMediaQuery: true,
+      rebuildFactor: (old, data) => true,
+      builder: (context, widget) => const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -30,12 +35,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute:
-          show ? 'introScreen' : (uid == null ? 'Begin' : 'ScanQR'),
+      initialRoute: "loginPage",
       routes: {
-        "introScreen": (context) => IntroScreen(),
-        "Begin": (context) => const BeginScreen(),
-        "ScanQR": (context) => const ScanQRPage(),
+        "loginPage": (context) => LoginPage(),
+        "addPage": (context) => const AddPage(),
+        "home": (context) => const HomePage(),
       },
     );
   }

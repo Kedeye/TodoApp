@@ -11,19 +11,14 @@ dependencies:
     sdk: flutter
 
   firebase_auth: ^4.4.0
+  intl: null
   shared_preferences: ^2.0.18
   firebase_core: ^2.7.0
   flutter_lints: ^2.0.0
   cloud_firestore: ^4.4.4
-  pin_code_fields: ^7.4.0
-  intl_phone_field: ^3.1.0
-  flutter_barcode_scanner: ^2.0.0
-  assets_audio_player: ^3.0.6
   flutter_plugin_tools: ^0.13.4+3
   flutter_native_splash: ^2.2.19
-  introduction_screen: ^3.1.7
-  floating_action_bubble: ^1.1.4
-  shimmer: ^3.0.0
+  flutter_screenutil: null
 
 flutter_native_splash:
   android: true
@@ -52,7 +47,6 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/
-    - assets/sound/
 
   fonts:
       - family: Poppins
@@ -63,31 +57,3 @@ flutter:
             weight: 500
           - asset: assets/fonts/Poppins-SemiBold.ttf
             weight: 700
-      - family: Cairo
-        fonts:
-          - asset: assets/fonts/Cairo-Regular.ttf
-            weight: 300
-          - asset: assets/fonts/Cairo-Medium.ttf
-            weight: 500
-          - asset: assets/fonts/Cairo-SemiBold.ttf
-            weight: 900
-      - family: EduSABeginner
-        fonts:
-          - asset: assets/fonts/EduSABeginner-VariableFont_wght.ttf
-            weight: 300
-      - family: JosefinSans
-        fonts:
-          - asset: assets/fonts/JosefinSans-Regular.ttf
-            weight: 300
-          - asset: assets/fonts/JosefinSans-Medium.ttf
-            weight: 500
-          - asset: assets/fonts/JosefinSans-SemiBold.ttf
-            weight: 900
-      - family: RobotoSlab
-        fonts:
-          - asset: assets/fonts/RobotoSlab-Regular.ttf
-            weight: 300
-          - asset: assets/fonts/RobotoSlab-Medium.ttf
-            weight: 500
-          - asset: assets/fonts/RobotoSlab-SemiBold.ttf
-            weight: 900
